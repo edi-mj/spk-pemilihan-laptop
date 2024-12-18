@@ -5,7 +5,7 @@
       <a class="nav-link text-white" href="index.php"><i class="bi bi-house"></i> Dashboard</a>
     </li>
     <li class="nav-item <?= ($page == 'Alternatif') ? 'bg-primary rounded' : '' ?>">
-      <a class="nav-link text-white" href="alternatif.php"><i class="bi bi-people"></i> Altermatif</a>
+      <a class="nav-link text-white" href="alternatif.php"><i class="bi bi-people"></i> Alternatif</a>
     </li>
     <li class="nav-item <?= ($page == 'Kriteria') ? 'bg-primary rounded' : '' ?>">
       <a class="nav-link text-white" href="kriteria.php"><i class="bi bi-card-checklist"></i> Kriteria</a>
