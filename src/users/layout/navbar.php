@@ -1,5 +1,8 @@
 <?php
 require '../base.php';
+if (isset($_GET['cari'])) {
+  $search_value = htmlspecialchars($_GET['input-cari']);
+}
 ?>
 
 <!DOCTYPE html>
