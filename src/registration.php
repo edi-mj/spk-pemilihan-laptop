@@ -1,5 +1,6 @@
 <?php
-require './validate.php';
+require_once './base.php';
+require BASEPATH . '/src/validate.php';
 
 $errors = [];
 if (isset($_POST['daftar'])) {
@@ -17,8 +18,14 @@ if (isset($_POST['daftar'])) {
   $usernameValue = htmlspecialchars($username);
   $passwordValue = htmlspecialchars($password);
   $confirmPasswordValue = htmlspecialchars($confirmPassword);
-}
 
+  if (!$errors) {
+    addUser($_POST);
+
+    header("Location:index.php");
+    exit();
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +45,7 @@ if (isset($_POST['daftar'])) {
 
 <body class="d-flex align-items-center justify-content-center bg-body-secondary" style="height: 100vh;">
   <div class="p-5 bg-body-tertiary shadow rounded border-top border-4 border-primary" style="width: 40%;">
-    <h3 class="text-center pb-4">Registrasi</h3>
+    <h3 class="text-center pb-4">Mendaftar</h3>
     <form action="" method="POST">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
@@ -63,12 +70,14 @@ if (isset($_POST['daftar'])) {
       </div>
       <div class="mb-3">
         <label for="confirm-password" class="form-label">Konfirmasi Password</label>
-        <input type="confirm-password" id="confirm-password" name="confirm-password" value="<?= ($confirmPasswordValue) ?? '' ?>" class="form-control">
+        <input type="password" id="confirm-password" name="confirm-password" value="<?= ($confirmPasswordValue) ?? '' ?>" class="form-control">
         <div class="text-danger ps-1">
           <?= $errors['confirm-password'] ?? '' ?>
         </div>
       </div>
       <button name="daftar" type="submit" class="btn btn-primary w-100">Daftar</button>
+      <p class="text-center mt-3">Sudah memiliki akun? <a class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="./index.php">Login</a></p>
+
     </form>
   </div>
 </body>

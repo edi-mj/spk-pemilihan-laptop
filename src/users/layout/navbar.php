@@ -1,5 +1,5 @@
 <?php
-define("BASEURL", "http://" . $_SERVER['SERVER_NAME'] . "/spk-pemilihan-laptop");
+require_once '../base.php';
 if (isset($_GET['cari'])) {
   $search_value = htmlspecialchars($_GET['input-cari']);
 }
@@ -22,11 +22,14 @@ if (isset($_GET['cari'])) {
 
 <body class="bg-body-tertiary mt-5 p-4">
   <!-- NAVBAR -->
-  <nav class="navbar fixed-top bg-body-secondary shadow">
+  <nav class="navbar fixed-top bg-body-secondary shadow navbar-expand-lg">
     <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a href="../index.php" class="nav-link <?= $page == 'Beranda' ? 'active' : '' ?>"><i class="bi bi-house-door pe-1"></i>Beranda</a>
+          <a href="<?= BASEURL; ?>/src/logout.php" class="nav-link"><i class="bi bi-box-arrow-left pe-2"></i>Logout</a>
+        </li>
+        <li class="nav-item">
+          <a href="<?= BASEURL; ?>/src/users/index.php" class="nav-link <?= $page == 'Beranda' ? 'active' : '' ?>"><i class="bi bi-house-door pe-1"></i>Beranda</a>
         </li>
       </ul>
       <form method="GET" action="./laptop_list.php" class="d-flex" role="search">

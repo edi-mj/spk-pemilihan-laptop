@@ -1,4 +1,5 @@
 <?php
+require_once BASEPATH . '/src/sql.php';
 
 function isEmpty($input)
 {
@@ -89,4 +90,17 @@ function validateConfirmPassword(&$errors, $password, $confirmPassword)
       $errors["confirm-password"] = "password tidak cocok";
     }
   }
+}
+
+
+function authenticate(&$errors, $username, $password)
+{
+  $user = getUser($username, $password);
+  if (!empty($user)) {
+    $_SESSION['user-id'] = $user['id_users'];
+    $_SESSION['role'] = $user['role'];
+    return true;
+  }
+  $errors['login'] = "USERNAME ATAU PASSWORD SALAH";
+  return false;
 }

@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <?php
 $page = 'Beranda';
-require './layout/navbar.php';
+require_once './layout/navbar.php';
 ?>
 <!-- NAVBAR END -->
 

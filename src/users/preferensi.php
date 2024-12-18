@@ -1,6 +1,8 @@
+<!-- NAVBAR -->
 <?php
-
-require '../validate.php';
+$page = 'Input Preferensi';
+require './layout/navbar.php';
+require BASEPATH . '/src/validate.php';
 
 $errors = [];
 
@@ -11,13 +13,6 @@ if (isset($_GET['submit'])) {
   validateKategori($errors, $kategori);
   validatePrice($errors, $max_price);
 }
-
-?>
-
-<!-- NAVBAR -->
-<?php
-$page = 'Beranda';
-require './layout/navbar.php';
 ?>
 <!-- NAVBAR END -->
 
