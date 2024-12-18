@@ -1,6 +1,7 @@
 <?php
-require '../base.php';
+define("BASEURL", "http://" . $_SERVER['SERVER_NAME'] . "/spk-pemilihan-laptop");
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,8 +11,8 @@ require '../base.php';
   <title><?= $page; ?></title>
   <link
     rel="stylesheet"
-    href="<?= BASEURL ?>/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    href="<?= BASEURL; ?>/node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link
     rel="stylesheet"
-    href="<?= BASEURL ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
+    href="<?= BASEURL; ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
 </head>

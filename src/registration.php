@@ -1,5 +1,4 @@
 <?php
-require 'base.php';
 require './validate.php';
 
 $errors = [];
@@ -31,10 +30,10 @@ if (isset($_POST['daftar'])) {
   <title>Registrasi</title>
   <link
     rel="stylesheet"
-    href="<?= BASEURL ?>/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link
     rel="stylesheet"
-    href="<?= BASEURL ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
+    href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
 </head>
 
 <body class="d-flex align-items-center justify-content-center bg-body-secondary" style="height: 100vh;">

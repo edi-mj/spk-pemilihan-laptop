@@ -10,7 +10,7 @@ require './layout/navbar.php';
   <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="<?= BASEURL; ?>/src/assets/img/test.png" class="card-img-top img-fluid object-fit-contain rounded-start" alt="item">
+        <img src="../assets/img/test.png" class="card-img-top img-fluid object-fit-contain rounded-start" alt="item">
       </div>
       <div class="col-md-8">
         <div class="card-body">
