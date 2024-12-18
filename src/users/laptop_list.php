@@ -6,7 +6,7 @@ require './layout/navbar.php';
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container d-flex flex-wrap justify-content-center p-5 gap-4">
+<div id="content" class="container d-flex flex-wrap justify-content-center gap-4">
   <!-- CARD ITEM -->
   <div class="card shadow border-0" style="width: 14rem;">
     <div class="ratio ratio-1x1 border-bottom border-dark-subtle">

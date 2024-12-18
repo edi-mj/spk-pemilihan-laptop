@@ -6,7 +6,7 @@ require './layout/navbar.php';
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="d-flex flex-column align-items-center mt-5">
+<div id="content" class="d-flex flex-column align-items-center p-5">
 
   <h2>
     Rekomendasi Pemilihan Laptop

@@ -17,7 +17,7 @@ require '../base.php';
     href="<?= BASEURL ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
 </head>
 
-<body class="bg-body-tertiary pt-5">
+<body class="bg-body-tertiary mt-5 p-4">
   <!-- NAVBAR -->
   <nav class="navbar fixed-top bg-body-secondary shadow">
     <div class="container-fluid">
