@@ -13,7 +13,7 @@ include_once './layout/html_head.php';
     <!-- SIDEBAR MENU END -->
 
     <!-- MAIN CONTENT -->
-    <div id="content" class="w-75 p-3">
+    <div id="content" class="w-75 p-3 flex-grow-1">
       <h2 class="mb-4">Daftar Item</h2>
       <!-- Tabel -->
       <table class="w-100 table table-striped table-hover">

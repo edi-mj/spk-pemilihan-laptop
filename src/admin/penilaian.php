@@ -13,7 +13,7 @@ include_once './layout/html_head.php';
     <!-- SIDEBAR MENU END -->
 
     <!-- MAIN CONTENT -->
-    <div id="content" class="w-75 p-3">
+    <div id="content" class="w-75 p-3 flex-grow-1">
       <table class="table table-sm table-striped text-center border-top">
         <caption>Nilai Awal Alternatif</caption>
         <thead class="table-dark align-middle">
