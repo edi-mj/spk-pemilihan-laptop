@@ -26,13 +26,14 @@ require '../base.php';
           <a href="<?= BASEURL ?>/src/users/" class="nav-link <?= $page == 'Beranda' ? 'active' : '' ?>"><i class="bi bi-house-door pe-1"></i>Beranda</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form method="GET" action="./laptop_list.php" class="d-flex" role="search">
         <input
+          name="input-cari"
+          value="<?= ($search_value) ?? '' ?>"
           class="form-control me-2"
           type="search"
-          placeholder="Cari Laptop"
-          aria-label="Search" />
-        <a href="./laptop_list.php" class="btn btn-outline-primary" type="submit">Cari</a>
+          placeholder="Cari Laptop" />
+        <button name="cari" class="btn btn-outline-primary" type="submit">Cari</button>
       </form>
     </div>
   </nav>

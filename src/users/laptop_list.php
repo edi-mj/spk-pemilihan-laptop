@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['cari'])) {
+  $search_value = htmlspecialchars($_GET['input-cari']);
+}
+?>
+
 <!-- NAVBAR -->
 <?php
 $page = 'Hasil';
