@@ -43,9 +43,9 @@ include_once './layout/html_head.php';
       </table>
 
       <!-- Tombol Tambah -->
-      <button class="btn btn-success">
-        <i class="bi bi-plus-lg"></i> Tambah Item
-      </button>
+      <a href="./tambah_kriteria.php" class="btn btn-success">
+        <i class="bi bi-plus-lg"></i> Tambah Kriteria
+      </a>
     </div>
   </div>
   <!-- MAIN CONTENT END -->

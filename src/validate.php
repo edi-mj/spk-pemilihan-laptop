@@ -11,11 +11,18 @@ function isDigit($input)
   return preg_match("/^[0-9]+$/", $input);
 }
 
+function isAlphabet($input)
+{
+  $patt = "/^[a-zA-Z]+$/";
+  return preg_match($patt, $input);
+}
+
 function checkAlphaNumeric($field)
 {
   $patt = "/^[A-Za-z\d]+$/";
   return preg_match($patt, $field);
 }
+
 // VALIDASI FORM PREFERENSI USER
 function validateKategori(&$errors, $input)
 {
@@ -32,6 +39,8 @@ function validatePrice(&$errors, $input)
 }
 // VALIDASI FORM PREFERENSI USER END
 
+
+// VALIDASI FORM REGISTRASI
 function validateEmail(&$errors, $email)
 {
   if (isEmpty($email)) {
@@ -91,8 +100,9 @@ function validateConfirmPassword(&$errors, $password, $confirmPassword)
     }
   }
 }
+// VALIDASI FORM REGISTRASI END
 
-
+// VALIDASI LOGIN
 function authenticate(&$errors, $username, $password)
 {
   $user = getUser($username, $password);
@@ -104,3 +114,31 @@ function authenticate(&$errors, $username, $password)
   $errors['login'] = "USERNAME ATAU PASSWORD SALAH";
   return false;
 }
+// VALIDASI LOGIN END
+
+// VALIDASI TAMBAH KRITERIA
+function validateNamaKriteria(&$errors, $input)
+{
+  if (isEmpty($input)) {
+    $errors['nama-kriteria'] = "Nama kriteria tidak boleh kosong";
+  } else {
+    if (!isAlphabet($input)) {
+      $errors['nama-kriteria'] = "Nama kriteria hanya boleh berupa huruf alfabet";
+    }
+  }
+}
+
+function validateBobot(&$errors, $input)
+{
+  $patt = "/^[0-9]+([\/\.]*[0-9]+)*$/";
+  $isValid = preg_match($patt, $input);
+
+  if (isEmpty($input)) {
+    $errors['bobot'] = "Bobot tidak boleh kosong";
+  } else {
+    if (!$isValid) {
+      $errors['bobot'] = "Bobot hanya boleh berupa angka desimal";
+    }
+  }
+}
+// VALIDASI TAMBAH KRITERIA END

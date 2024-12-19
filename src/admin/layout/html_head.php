@@ -1,5 +1,5 @@
 <?php
-define("BASEURL", "http://" . $_SERVER['SERVER_NAME'] . "/spk-pemilihan-laptop");
+require_once '../base.php';
 ?>
 
 <!DOCTYPE html>
