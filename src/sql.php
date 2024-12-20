@@ -71,3 +71,21 @@ function addAlternatif($data, $gambar)
     ":id_kategori" => $idKategori
   ]);
 }
+
+function getAlternatif()
+{
+  $st = DB->prepare("SELECT l.*, k.nama_kategori FROM laptop l, kategori k, laptop_kategori lk WHERE lk.id_laptop = l.id_laptop AND lk.id_kategori = k.id_kategori");
+  $st->execute();
+
+  return $st->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAlternatifById($id)
+{
+  $st = DB->prepare("SELECT * FROM laptop WHERE id_laptop = :id_laptop");
+  $st->execute([
+    ":id_laptop" => $id
+  ]);
+
+  return $st->fetchAll(PDO::FETCH_ASSOC);
+}

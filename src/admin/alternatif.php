@@ -1,6 +1,9 @@
 <?php
 $page = "Alternatif";
 include_once './layout/html_head.php';
+include_once BASEPATH . '/src/sql.php';
+
+$data_alternatif = getAlternatif();
 ?>
 
 <body>
@@ -14,13 +17,14 @@ include_once './layout/html_head.php';
 
     <!-- MAIN CONTENT -->
     <div id="content" class="w-75 p-3 bg-light flex-grow-1">
-      <h2 class="mb-4">Daftar Item</h2>
+      <h2 class="mb-4">Data Alternatif</h2>
       <!-- Tabel -->
-      <table class="w-100 table table-striped table-hover">
-        <thead class="table-dark">
+      <table class="w-100 table table-striped text-center table-hover">
+        <thead class="table-dark align-middle">
           <tr>
             <th>Model</th>
             <th>Harga</th>
+            <th>RAM</th>
             <th>Tipe Storage</th>
             <th>Kapasitas Storage</th>
             <th>Kapasitas Baterai</th>
@@ -30,23 +34,26 @@ include_once './layout/html_head.php';
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Asus vivobook 14</td>
-            <td>7.800.000</td>
-            <td>SSD</td>
-            <td>512</td>
-            <td>6000</td>
-            <td>1.5</td>
-            <td>Gaming</td>
-            <td>
-              <button class="btn btn-sm btn-warning me-2">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
+          <?php foreach ($data_alternatif as $row): ?>
+            <tr>
+              <td><?= $row['model']; ?></td>
+              <td><?= $row['harga']; ?></td>
+              <td><?= $row['RAM']; ?></td>
+              <td><?= $row['tipe_storage']; ?></td>
+              <td><?= $row['kapasitas_storage']; ?></td>
+              <td><?= $row['kapasitas_baterai']; ?></td>
+              <td><?= $row['berat']; ?></td>
+              <td><?= $row['nama_kategori']; ?></td>
+              <td>
+                <a href="edit_alternatif.php?id_laptop=<?= $row['id_laptop']; ?>" class="btn btn-sm btn-warning m-auto">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a href="hapus_alternatif.php?id_laptop=<?= $row['id_laptop']; ?>" class="btn btn-sm btn-danger">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
 
