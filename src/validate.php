@@ -11,16 +11,28 @@ function isDigit($input)
   return preg_match("/^[0-9]+$/", $input);
 }
 
+function isNumeric($input)
+{
+  $patt = "/^[0-9]([\.]?[0-9]+)*$/";
+  return preg_match($patt, $input);
+}
+
 function isAlphabet($input)
 {
   $patt = "/^[a-zA-Z]+$/";
   return preg_match($patt, $input);
 }
 
-function checkAlphaNumeric($field)
+function isAlphanumeric($field)
 {
   $patt = "/^[A-Za-z\d]+$/";
   return preg_match($patt, $field);
+}
+
+function alphanumericWithSpace($input)
+{
+  $patt = "/^[A-Za-z\d ]+$/";
+  return preg_match($patt, $input);
 }
 
 // VALIDASI FORM PREFERENSI USER
@@ -60,7 +72,7 @@ function validateUsername(&$errors, $username)
   if (isEmpty($username)) {
     $errors["username"] = "username tidak boleh kosong";
   } else {
-    if (!checkAlphaNumeric($username)) {
+    if (!isAlphanumeric($username)) {
       $errors["username"] = "username hanya boleh mengandung huruf dan angka";
     } else if (!preg_match($oneDigit, $username)) {
       $errors["username"] = "username harus mengandung setidaknya 1 digit angka";
@@ -68,10 +80,9 @@ function validateUsername(&$errors, $username)
       $errors["username"] = "username harus mengandung setidaknya 1 huruf";
     } else if (strlen($username) < 6) {
       $errors["username"] = "username harus terdiri dari minimal 6 karakter";
+    } else if (checkUsernameSql($username)) {
+      $errors["username"] = "username tidak tersedia";
     }
-    // else if (checkUsernameSql($username)) {
-    //   $errors["username"] = "username tidak tersedia";
-    // }
   }
 }
 
@@ -130,15 +141,71 @@ function validateNamaKriteria(&$errors, $input)
 
 function validateBobot(&$errors, $input)
 {
-  $patt = "/^[0-9]+([\/\.]*[0-9]+)*$/";
-  $isValid = preg_match($patt, $input);
-
   if (isEmpty($input)) {
     $errors['bobot'] = "Bobot tidak boleh kosong";
   } else {
-    if (!$isValid) {
+    if (!isNumeric($input)) {
       $errors['bobot'] = "Bobot hanya boleh berupa angka desimal";
     }
   }
 }
 // VALIDASI TAMBAH KRITERIA END
+
+
+// VALIDASI TAMBAH ALTERNATIF
+function validateModel(&$errors, $input)
+{
+  if (isEmpty($input)) {
+    $errors['model'] = "tidak boleh kosong";
+  } else {
+    if (!alphanumericWithSpace($input)) {
+      $errors['model'] = "hanya boleh berupa huruf dan angka";
+    }
+  }
+}
+
+function validateTipeStorage(&$errors, $input)
+{
+  if (isEmpty($input)) {
+    $errors['tipe-storage'] = "tidak boleh kosong";
+  } else {
+
+    if (!isAlphabet($input)) {
+      $errors['tipe-storage'] = "hanya boleh berupa angka desimal";
+    }
+  }
+}
+
+function validateNumeric(&$errors, $field, $input)
+{
+  if (isEmpty($input)) {
+    $errors[$field] = "tidak boleh kosong";
+  } else {
+
+    if (!isNumeric($input)) {
+      $errors[$field] = "hanya boleh berupa angka desimal";
+    }
+  }
+}
+
+function validateGambar(&$errors)
+{
+  $namaFile = $_FILES["gambar"]["name"];
+  $error = $_FILES["gambar"]["error"];
+  if ($error === 4) {
+    $errors['gambar'] = "pilih gambar terlebih dahulu";
+    return false;
+  }
+  $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+  $ekstensiGambar = explode('.', $namaFile);
+  $ekstensiGambar = strtolower(end($ekstensiGambar));
+  if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+    $errors['gambar'] = "ekstensi gambar tidak valid";
+    return false;
+  }
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= '.';
+  $namaFileBaru .= $ekstensiGambar;
+  return $namaFileBaru;
+}
+// VALIDASI TAMBAH ALTERNATIF END

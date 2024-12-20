@@ -5,7 +5,7 @@ include_once './layout/html_head.php';
 
 <body>
   <!-- CONTAINER -->
-  <div class="d-flex">
+  <div class="d-flex" style="padding-left: 20%;">
 
     <!-- SIDEBAR MENU -->
     <?php include_once './layout/navbar.php'; ?>
@@ -32,10 +32,10 @@ include_once './layout/html_head.php';
             <td>0.30</td>
             <td>
               <button class="btn btn-sm btn-warning me-2">
-                <i class="bi bi-pencil-square"></i>
+                <i class="bi bi-pencil-square"></i>Edit
               </button>
               <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
+                <i class="bi bi-trash"></i>Hapus
               </button>
             </td>
           </tr>

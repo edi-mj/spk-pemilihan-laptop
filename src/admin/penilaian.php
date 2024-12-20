@@ -5,7 +5,7 @@ include_once './layout/html_head.php';
 
 <body>
   <!-- CONTAINER -->
-  <div class="d-flex">
+  <div class="d-flex" style="padding-left: 20%;">
 
     <!-- SIDEBAR MENU -->
     <?php include_once './layout/navbar.php'; ?>

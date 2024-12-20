@@ -27,7 +27,7 @@ if (isset($_POST['tambah'])) {
 
 <body>
   <!-- CONTAINER -->
-  <div class="d-flex">
+  <div class="d-flex " style="padding-left: 20%;">
 
     <!-- SIDEBAR MENU -->
     <?php include_once './layout/navbar.php'; ?>
@@ -35,7 +35,7 @@ if (isset($_POST['tambah'])) {
     <!-- SIDEBAR MENU END -->
 
     <!-- MAIN CONTENT -->
-    <div id="content" class="w-75 p-3 d-flex flex-grow-1 justify-content-center align-items-center">
+    <div id="content" class="w-75 p-3 d-flex flex-grow-1 justify-content-center align-items-center" style="height: 100vh;">
 
       <div class="p-3 w-50 bg-body-tertiary shadow rounded">
         <h3 class="text-center pb-4">Tambah Kriteria</h3>

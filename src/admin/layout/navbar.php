@@ -1,4 +1,4 @@
-<div id="sidebar" class="bg-dark bg-gradient text-white vh-100 p-3" style="width: 20%;">
+<div id="sidebar" class="position-fixed start-0 top-0 bg-dark bg-gradient text-white vh-100 p-3" style="width: 20%;">
   <h4>Admin</h4>
   <ul class=" nav flex-column">
     <li class="nav-item <?= ($page == 'Dashboard') ? 'bg-primary rounded' : '' ?>">
@@ -12,7 +12,7 @@
     </li>
 
     <li class="nav-item <?= ($page == 'Penilaian') ? 'bg-primary rounded' : '' ?>">
-      <a class="nav-link text-white" href="penilaian.php"><i class="bi bi-calculator"></i> Penilaian</a>
+      <a class="nav-link text-white" href="penilaian.php"><i class="bi bi-calculator"></i> Perhitungan</a>
     </li>
   </ul>
 </div>

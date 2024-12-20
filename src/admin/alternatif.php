@@ -5,7 +5,7 @@ include_once './layout/html_head.php';
 
 <body>
   <!-- CONTAINER -->
-  <div class="d-flex">
+  <div class="d-flex" style="padding-left: 20%;">
 
     <!-- SIDEBAR MENU -->
     <?php include_once './layout/navbar.php'; ?>
@@ -25,6 +25,7 @@ include_once './layout/html_head.php';
             <th>Kapasitas Storage</th>
             <th>Kapasitas Baterai</th>
             <th>Berat</th>
+            <th>Kategori</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -36,6 +37,7 @@ include_once './layout/html_head.php';
             <td>512</td>
             <td>6000</td>
             <td>1.5</td>
+            <td>Gaming</td>
             <td>
               <button class="btn btn-sm btn-warning me-2">
                 <i class="bi bi-pencil-square"></i>
@@ -49,9 +51,9 @@ include_once './layout/html_head.php';
       </table>
 
       <!-- Tombol Tambah -->
-      <button class="btn btn-success">
+      <a href="tambah_alternatif.php" class="btn btn-success">
         <i class="bi bi-plus-lg"></i> Tambah Item
-      </button>
+      </a>
     </div>
   </div>
   <!-- MAIN CONTENT END -->
