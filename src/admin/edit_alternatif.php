@@ -68,9 +68,9 @@ if (isset($_POST['edit'])) {
     <div id="content" class="container min-vh-100 w-100 p-4 d-flex justify-content-center align-items-center">
 
       <div class="w-75 mx-auto p-4 bg-body-tertiary shadow rounded">
-        <h3 class="text-center pb-4">Tambah Alternatif</h3>
+        <h3 class="text-center pb-4">Edit Alternatif</h3>
         <form action="" method="POST" class="row g-3" enctype="multipart/form-data">
-          <input type="hidden" name="id_laptop" value="<?= $_GET['id_laptop']; ?>">
+          <input type="hidden" name="id-laptop" value="<?= $_GET['id_laptop']; ?>">
           <div class=" col-md-6">
             <label for="model" class="form-label">Model</label>
             <input type="text" id="model" name="model" value="<?= ($modelValue) ?? '' ?>" class="form-control">
@@ -123,9 +123,9 @@ if (isset($_POST['edit'])) {
           <div class=" col-md-6">
             <label for="kategori" class="form-label">Kategori</label>
             <select id="kategori" name="kategori" class="form-select">
-              <option <?= (isset($kategori) && $kategori === "Gaming") ? 'selected' : '' ?>>Gaming</option>
-              <option <?= (isset($kategori) && $kategori === "Design/Editing") ? 'selected' : '' ?>>Design/Editing</option>
-              <option <?= (isset($kategori) && $kategori === "Kuliah/Kerja Ringan") ? 'selected' : '' ?>>Kuliah/Kerja Ringan</option>
+              <option <?= (isset($kategoriValue) && $kategoriValue === "Gaming") ? 'selected' : '' ?>>Gaming</option>
+              <option <?= (isset($kategoriValue) && $kategoriValue === "Design/Editing") ? 'selected' : '' ?>>Design/Editing</option>
+              <option <?= (isset($kategoriValue) && $kategoriValue === "Kuliah/Kerja Ringan") ? 'selected' : '' ?>>Kuliah/Kerja Ringan</option>
             </select>
             <div class="text-danger ps-1">
               <?= $errors['kategori'] ?? '' ?>

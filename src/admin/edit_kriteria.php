@@ -4,6 +4,8 @@ include_once './layout/html_head.php';
 require_once BASEPATH . '/src/validate.php';
 require_once BASEPATH . '/src/sql.php';
 
+$dataKriteria = getKriteriaById($_GET['id_kriteria']);
+
 $errors = [];
 if (isset($_POST['tambah'])) {
 
@@ -18,11 +20,15 @@ if (isset($_POST['tambah'])) {
   $bobotValue = htmlspecialchars($bobot);
 
   if (!$errors) {
-    addKriteria($_POST);
+    updateKriteria($_POST);
 
     header("Location:kriteria.php");
     exit();
   }
+} else {
+  $namaKriteriaValue = $dataKriteria['nama_kriteria'];
+  $atributValue = $dataKriteria['atribut'];
+  $bobotValue = $dataKriteria['bobot'];
 }
 ?>
 
@@ -39,8 +45,9 @@ if (isset($_POST['tambah'])) {
     <div id="content" class="w-75 p-3 d-flex flex-grow-1 justify-content-center align-items-center" style="height: 100vh;">
 
       <div class="p-3 w-50 bg-body-tertiary shadow rounded">
-        <h3 class="text-center pb-4">Tambah Kriteria</h3>
+        <h3 class="text-center pb-4">Edit Kriteria</h3>
         <form action="" method="POST">
+          <input type="hidden" name="id-kriteria" value="<?= $_GET['id_kriteria'] ?>">
           <div class="mb-3">
             <label for="nama-kriteria" class="form-label">Nama Kriteria</label>
             <input type="text" id="nama-kriteria" name="nama-kriteria" value="<?= ($namaKriteriaValue) ?? '' ?>" class="form-control">
@@ -51,8 +58,8 @@ if (isset($_POST['tambah'])) {
           <div class="mb-3">
             <label for="atribut" class="form-label">Atribut</label>
             <select id="atribut" name="atribut" class="form-select">
-              <option value="cost" <?= (isset($atribut) && $atribut === "cost") ? 'selected' : '' ?>>Cost</option>
-              <option value="benefit" <?= (isset($atribut) && $atribut === "benefit") ? 'selected' : '' ?>>Benefit</option>
+              <option value="cost" <?= (isset($atributValue) && $atributValue === "cost") ? 'selected' : '' ?>>Cost</option>
+              <option value="benefit" <?= (isset($atributValue) && $atributValue === "benefit") ? 'selected' : '' ?>>Benefit</option>
             </select>
             <div class="text-danger ps-1">
               <?= $errors['atribut'] ?? '' ?>
@@ -66,7 +73,7 @@ if (isset($_POST['tambah'])) {
               <?= $errors['bobot'] ?? '' ?>
             </div>
           </div>
-          <button name="tambah" type="submit" class="btn btn-success w-100">Tambah</button>
+          <button name="tambah" type="submit" class="btn btn-success w-100">Edit</button>
         </form>
         <a class="btn btn-secondary w-100 mt-2" href="./kriteria.php">Batal</a>
       </div>

@@ -95,7 +95,7 @@ function updateAlternatif($data, $gambar)
   $updateLaptop = DB->prepare("UPDATE laptop SET model = :model, harga = :harga, RAM = :RAM, tipe_storage = :tipe_storage, kapasitas_storage = :kapasitas_storage, kapasitas_baterai = :kapasitas_baterai, berat = :berat, gambar = :gambar WHERE id_laptop = :id");
 
   $updateLaptop->execute([
-    ":id" => $data['id_laptop'],
+    ":id" => $data['id-laptop'],
     ":model" => $data['model'],
     ":harga" => $data['harga'],
     ":RAM" => $data['ram'],
@@ -132,6 +132,59 @@ function hapusAlternatif($id)
     ]);
     return true;
   } catch (PDOException $err) {
+    return false;
+  }
+}
+
+function addKriteria($data)
+{
+  $st = DB->prepare("INSERT INTO kriteria (nama_kriteria, atribut, bobot) VALUES (:nama_kriteria, :atribut, :bobot)");
+
+  $st->execute([
+    ":nama_kriteria" => $data['nama-kriteria'],
+    ":atribut" => $data['atribut'],
+    ":bobot" => $data['bobot']
+  ]);
+}
+
+function getKriteria()
+{
+  $st = DB->prepare("SELECT * FROM kriteria");
+  $st->execute();
+
+  return $st->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getKriteriaById($id)
+{
+  $st = DB->prepare("SELECT * FROM kriteria WHERE id_kriteria = :id");
+  $st->execute([
+    ":id" => $id
+  ]);
+  return $st->fetch(PDO::FETCH_ASSOC);
+}
+
+function updateKriteria($data)
+{
+  $st = DB->prepare("UPDATE kriteria SET nama_kriteria = :nama_kriteria, atribut = :atribut, bobot = :bobot WHERE id_kriteria = :id");
+
+  $st->execute([
+    ":id" => $data['id-kriteria'],
+    ":nama_kriteria" => $data['nama-kriteria'],
+    ":atribut" => $data['atribut'],
+    ":bobot" => $data['bobot']
+  ]);
+}
+
+function hapusKriteria($id)
+{
+  try {
+    $st = DB->prepare("DELETE FROM kriteria WHERE id_kriteria = :id");
+    $st->execute([
+      ":id" => $id
+    ]);
+    return true;
+  } catch (PDOException $e) {
     return false;
   }
 }

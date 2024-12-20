@@ -17,7 +17,15 @@ $data_alternatif = getAlternatif();
 
     <!-- MAIN CONTENT -->
     <div id="content" class="w-75 p-3 bg-light flex-grow-1">
-      <h2 class="mb-4">Data Alternatif</h2>
+      <h2 class="mb-4">Daftar Alternatif</h2>
+
+      <div class="d-flex justify-content-end pb-2">
+        <!-- Tombol Tambah -->
+        <a href="tambah_alternatif.php" class="btn btn-success fw-medium">
+          <i class="bi bi-plus-lg"></i> Tambah Alternatif
+        </a>
+      </div>
+
       <!-- Tabel -->
       <table class="w-100 table table-striped text-center table-hover">
         <thead class="table-dark align-middle">
@@ -57,10 +65,7 @@ $data_alternatif = getAlternatif();
         </tbody>
       </table>
 
-      <!-- Tombol Tambah -->
-      <a href="tambah_alternatif.php" class="btn btn-success">
-        <i class="bi bi-plus-lg"></i> Tambah Item
-      </a>
+
     </div>
   </div>
   <!-- MAIN CONTENT END -->
