@@ -1,6 +1,7 @@
 <?php
 require_once './base.php';
 require BASEPATH . '/src/validate.php';
+require_once BASEPATH . '/src/is_logged_in.php';
 
 $errors = [];
 if (isset($_POST['daftar'])) {

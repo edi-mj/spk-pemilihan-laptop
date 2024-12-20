@@ -118,6 +118,7 @@ function authenticate(&$errors, $username, $password)
 {
   $user = getUser($username, $password);
   if (!empty($user)) {
+    $_SESSION['is_logged_in'] = true;
     $_SESSION['user-id'] = $user['id_users'];
     $_SESSION['role'] = $user['role'];
     return true;

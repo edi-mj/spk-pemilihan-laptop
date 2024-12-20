@@ -2,6 +2,9 @@
 <?php
 $page = 'Hasil';
 require './layout/navbar.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/user_permission.php';
+
 ?>
 <!-- NAVBAR END -->
 

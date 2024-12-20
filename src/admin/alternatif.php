@@ -2,6 +2,8 @@
 $page = "Alternatif";
 include_once './layout/html_head.php';
 include_once BASEPATH . '/src/sql.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/admin_permission.php';
 
 $data_alternatif = getAlternatif();
 ?>

@@ -1,6 +1,9 @@
 <?php
 $page = "Penilaian";
 include_once './layout/html_head.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/admin_permission.php';
+
 ?>
 
 <body>

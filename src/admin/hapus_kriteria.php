@@ -2,6 +2,8 @@
 $page = "Kriteria";
 include_once './layout/html_head.php';
 include_once BASEPATH . '/src/sql.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/admin_permission.php';
 
 if (isset($_POST['hapus'])) {
   $deleted = hapusKriteria($_GET['id_kriteria']);

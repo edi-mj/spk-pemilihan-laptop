@@ -2,6 +2,8 @@
 $page = "Alternatif";
 include_once './layout/html_head.php';
 require BASEPATH . '/src/validate.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/admin_permission.php';
 
 $errors = [];
 if (isset($_POST['tambah'])) {

@@ -3,6 +3,8 @@
 $page = 'Input Preferensi';
 require './layout/navbar.php';
 require BASEPATH . '/src/validate.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/user_permission.php';
 
 $errors = [];
 

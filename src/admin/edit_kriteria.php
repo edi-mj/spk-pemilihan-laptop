@@ -3,6 +3,8 @@ $page = "Kriteria";
 include_once './layout/html_head.php';
 require_once BASEPATH . '/src/validate.php';
 require_once BASEPATH . '/src/sql.php';
+require_once BASEPATH . '/src/actor_permission.php';
+require_once BASEPATH . '/src/admin_permission.php';
 
 $dataKriteria = getKriteriaById($_GET['id_kriteria']);
 
