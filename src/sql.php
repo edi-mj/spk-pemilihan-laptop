@@ -82,10 +82,39 @@ function getAlternatif()
 
 function getAlternatifById($id)
 {
-  $st = DB->prepare("SELECT * FROM laptop WHERE id_laptop = :id_laptop");
+  $st = DB->prepare("SELECT l.*, k.nama_kategori FROM laptop l, kategori k, laptop_kategori lk WHERE lk.id_laptop = l.id_laptop AND lk.id_kategori = k.id_kategori AND l.id_laptop = :id");
   $st->execute([
-    ":id_laptop" => $id
+    ":id" => $id
   ]);
 
-  return $st->fetchAll(PDO::FETCH_ASSOC);
+  return $st->fetch(PDO::FETCH_ASSOC);
+}
+
+function updateAlternatif($data, $gambar)
+{
+  $updateLaptop = DB->prepare("UPDATE laptop SET model = :model, harga = :harga, RAM = :RAM, tipe_storage = :tipe_storage, kapasitas_storage = :kapasitas_storage, kapasitas_baterai = :kapasitas_baterai, berat = :berat, gambar = :gambar WHERE id_laptop = :id");
+
+  $updateLaptop->execute([
+    ":id" => $data['id_laptop'],
+    ":model" => $data['model'],
+    ":harga" => $data['harga'],
+    ":RAM" => $data['ram'],
+    ":tipe_storage" => $data['tipe-storage'],
+    ":kapasitas_storage" => $data['kapasitas-storage'],
+    ":kapasitas_baterai" => $data['kapasitas-baterai'],
+    ":berat" => $data['berat'],
+    ":gambar" => $gambar
+  ]);
+
+  $queryIdKategori = DB->prepare("SELECT * FROM kategori WHERE nama_kategori = :kategori");
+  $queryIdKategori->execute([
+    ":kategori" => $data['kategori']
+  ]);
+  $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'];
+
+  $updateLaptopKategori =  DB->prepare("UPDATE laptop_kategori SET id_kategori = :id_kategori WHERE id_laptop = :id_laptop");
+  $updateLaptopKategori->execute([
+    ":id_laptop" => $data['id_laptop'],
+    ":id_kategori" => $idKategori
+  ]);
 }

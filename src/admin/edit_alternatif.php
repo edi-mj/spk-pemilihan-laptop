@@ -3,8 +3,10 @@ $page = "Alternatif";
 include_once './layout/html_head.php';
 require BASEPATH . '/src/validate.php';
 
+$dataAlternatif = getAlternatifById($_GET['id_laptop']);
+
 $errors = [];
-if (isset($_POST['tambah'])) {
+if (isset($_POST['edit'])) {
 
   $model = $_POST['model'];
   $harga = $_POST['harga'];
@@ -22,8 +24,10 @@ if (isset($_POST['tambah'])) {
   validateNumeric($errors, 'kapasitas-storage', $kapasitasStorage);
   validateNumeric($errors, 'kapasitas-baterai', $kapasitasBaterai);
   validateNumeric($errors, 'berat', $berat);
-  $gambar = validateGambar($errors);
+  $gambarLama = $dataAlternatif['gambar'];
+  $gambar = editGambar($gambarLama);
 
+  // $bobotValue = htmlspecialchars($bobot);
   $modelValue = htmlspecialchars($model);
   $hargaValue = htmlspecialchars($harga);
   $ramValue = htmlspecialchars($ram);
@@ -34,11 +38,21 @@ if (isset($_POST['tambah'])) {
   $kategoriValue = htmlspecialchars($kategori);
 
   if (!$errors) {
-    addAlternatif($_POST, $gambar);
+    updateAlternatif($_POST, $gambar);
 
     header("Location:alternatif.php");
     exit();
   }
+} else {
+  // DATA SEBELUM DIEDIT
+  $modelValue = $dataAlternatif['model'];
+  $hargaValue = $dataAlternatif['harga'];
+  $ramValue = $dataAlternatif['RAM'];
+  $tipeStorageValue = $dataAlternatif['tipe_storage'];
+  $kapasitasStorageValue = $dataAlternatif['kapasitas_storage'];
+  $kapasitasBateraiValue = $dataAlternatif['kapasitas_baterai'];
+  $beratValue = $dataAlternatif['berat'];
+  $kategoriValue = $dataAlternatif['nama_kategori'];
 }
 ?>
 
@@ -57,6 +71,7 @@ if (isset($_POST['tambah'])) {
       <div class="w-75 mx-auto p-4 bg-body-tertiary shadow rounded">
         <h3 class="text-center pb-4">Tambah Alternatif</h3>
         <form action="" method="POST" class="row g-3" enctype="multipart/form-data">
+          <input type="hidden" name="id_laptop" value="<?= $_GET['id_laptop']; ?>">
           <div class=" col-md-6">
             <label for="model" class="form-label">Model</label>
             <input type="text" id="model" name="model" value="<?= ($modelValue) ?? '' ?>" class="form-control">
@@ -125,7 +140,7 @@ if (isset($_POST['tambah'])) {
             </div>
           </div>
           <div class="col-12">
-            <button name="tambah" type="submit" class="btn btn-success w-100">Tambah</button>
+            <button name="edit" type="submit" class="btn btn-success w-100">Edit</button>
             <a class="btn btn-secondary w-100 mt-2" href="./alternatif.php">Batal</a>
           </div>
         </form>

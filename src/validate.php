@@ -152,7 +152,7 @@ function validateBobot(&$errors, $input)
 // VALIDASI TAMBAH KRITERIA END
 
 
-// VALIDASI TAMBAH ALTERNATIF
+// VALIDASI TAMBAH/EDIT ALTERNATIF
 function validateModel(&$errors, $input)
 {
   if (isEmpty($input)) {
@@ -208,4 +208,24 @@ function validateGambar(&$errors)
   $namaFileBaru .= $ekstensiGambar;
   return $namaFileBaru;
 }
-// VALIDASI TAMBAH ALTERNATIF END
+
+function editGambar($gambarLama)
+{
+  $namaFile = $_FILES["gambar"]["name"];
+  $error = $_FILES["gambar"]["error"];
+  if ($error === 4) {
+    return $gambarLama;
+  }
+  $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+  $ekstensiGambar = explode('.', $namaFile);
+  $ekstensiGambar = strtolower(end($ekstensiGambar));
+  if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+    $errors['gambar'] = "ekstensi gambar tidak valid";
+    return false;
+  }
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= '.';
+  $namaFileBaru .= $ekstensiGambar;
+  return $namaFileBaru;
+}
+// VALIDASI TAMBAH/EDIT ALTERNATIF END
