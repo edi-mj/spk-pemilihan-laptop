@@ -118,3 +118,20 @@ function updateAlternatif($data, $gambar)
     ":id_kategori" => $idKategori
   ]);
 }
+
+function hapusAlternatif($id)
+{
+  try {
+    $st = DB->prepare("DELETE FROM laptop_kategori WHERE id_laptop = :id");
+    $st->execute([
+      ":id" => $id
+    ]);
+    $st2 = DB->prepare("DELETE FROM laptop WHERE id_laptop = :id");
+    $st2->execute([
+      ":id" => $id
+    ]);
+    return true;
+  } catch (PDOException $err) {
+    return false;
+  }
+}

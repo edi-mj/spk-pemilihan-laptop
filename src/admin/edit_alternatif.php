@@ -16,6 +16,7 @@ if (isset($_POST['edit'])) {
   $kapasitasBaterai = $_POST['kapasitas-baterai'];
   $berat = $_POST['berat'];
   $kategori = $_POST['kategori'];
+  $gambarLama = $dataAlternatif['gambar'];
 
   validateModel($errors, $model);
   validateNumeric($errors, 'harga', $harga);
@@ -24,10 +25,8 @@ if (isset($_POST['edit'])) {
   validateNumeric($errors, 'kapasitas-storage', $kapasitasStorage);
   validateNumeric($errors, 'kapasitas-baterai', $kapasitasBaterai);
   validateNumeric($errors, 'berat', $berat);
-  $gambarLama = $dataAlternatif['gambar'];
   $gambar = editGambar($gambarLama);
 
-  // $bobotValue = htmlspecialchars($bobot);
   $modelValue = htmlspecialchars($model);
   $hargaValue = htmlspecialchars($harga);
   $ramValue = htmlspecialchars($ram);

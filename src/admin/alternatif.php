@@ -48,7 +48,7 @@ $data_alternatif = getAlternatif();
                 <a href="edit_alternatif.php?id_laptop=<?= $row['id_laptop']; ?>" class="btn btn-sm btn-warning m-auto">
                   <i class="bi bi-pencil-square"></i>
                 </a>
-                <a href="hapus_alternatif.php?id_laptop=<?= $row['id_laptop']; ?>" class="btn btn-sm btn-danger">
+                <a href="hapus_alternatif.php?id_laptop=<?= $row['id_laptop'] . '&model=' . $row['model']; ?>" class="btn btn-sm btn-danger">
                   <i class="bi bi-trash"></i>
                 </a>
               </td>
