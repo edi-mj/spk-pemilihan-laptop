@@ -59,17 +59,19 @@ function addAlternatif($data, $gambar)
   ]);
   $idLaptop = $queryIdLaptop->fetch(PDO::FETCH_ASSOC)['id_laptop'];
 
-  $queryIdKategori = DB->prepare("SELECT * FROM kategori WHERE nama_kategori = :kategori");
-  $queryIdKategori->execute([
-    ":kategori" => $data['kategori']
-  ]);
-  $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'];
+  foreach ($data['kategori'] as $kategori) {
+    $queryIdKategori = DB->prepare("SELECT * FROM kategori WHERE nama_kategori = :kategori");
+    $queryIdKategori->execute([
+      ":kategori" => $kategori
+    ]);
+    $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'];
 
-  $st2 =  DB->prepare("INSERT INTO laptop_kategori VALUES (:id_laptop, :id_kategori)");
-  $st2->execute([
-    ":id_laptop" => $idLaptop,
-    ":id_kategori" => $idKategori
-  ]);
+    $st2 =  DB->prepare("INSERT INTO laptop_kategori VALUES (:id_laptop, :id_kategori)");
+    $st2->execute([
+      ":id_laptop" => $idLaptop,
+      ":id_kategori" => $idKategori
+    ]);
+  }
 }
 
 function getAlternatif()
@@ -82,18 +84,29 @@ function getAlternatif()
 
 function getAlternatifById($id)
 {
-  $st = DB->prepare("SELECT l.*, k.nama_kategori FROM laptop l, kategori k, laptop_kategori lk WHERE lk.id_laptop = l.id_laptop AND lk.id_kategori = k.id_kategori AND l.id_laptop = :id");
+  $st = DB->prepare("SELECT l.* FROM laptop l, kategori k, laptop_kategori lk WHERE lk.id_laptop = l.id_laptop AND lk.id_kategori = k.id_kategori AND l.id_laptop = :id");
   $st->execute([
     ":id" => $id
   ]);
 
-  return $st->fetch(PDO::FETCH_ASSOC);
+  $queryKategori = DB->prepare("SELECT nama_kategori FROM kategori k JOIN laptop_kategori lk ON (lk.id_kategori = k.id_kategori) WHERE lk.id_laptop = :id");
+  $queryKategori->execute([
+    ":id" => $id
+  ]);
+  $kategori = $queryKategori->fetchAll(PDO::FETCH_ASSOC);
+  $arrKategori = [];
+  foreach ($kategori as $row) {
+    $arrKategori[] = $row['nama_kategori'];
+  }
+  $result = $st->fetch(PDO::FETCH_ASSOC);
+  $result['nama_kategori'] = $arrKategori;
+  return $result;
 }
 
 function updateAlternatif($data, $gambar)
 {
+  // Update data laptop
   $updateLaptop = DB->prepare("UPDATE laptop SET model = :model, harga = :harga, RAM = :RAM, tipe_storage = :tipe_storage, kapasitas_storage = :kapasitas_storage, kapasitas_baterai = :kapasitas_baterai, berat = :berat, gambar = :gambar WHERE id_laptop = :id");
-
   $updateLaptop->execute([
     ":id" => $data['id-laptop'],
     ":model" => $data['model'],
@@ -106,17 +119,45 @@ function updateAlternatif($data, $gambar)
     ":gambar" => $gambar
   ]);
 
-  $queryIdKategori = DB->prepare("SELECT * FROM kategori WHERE nama_kategori = :kategori");
-  $queryIdKategori->execute([
-    ":kategori" => $data['kategori']
-  ]);
-  $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'];
+  // Ambil daftar kategori lama
+  $queryLama = DB->prepare("SELECT k.id_kategori, k.nama_kategori FROM kategori k JOIN laptop_kategori lk USING (id_kategori) WHERE lk.id_laptop = :id_laptop");
+  $queryLama->execute([":id_laptop" => $data['id-laptop']]);
+  $kategoriLama = $queryLama->fetchAll(PDO::FETCH_ASSOC);
 
-  $updateLaptopKategori =  DB->prepare("UPDATE laptop_kategori SET id_kategori = :id_kategori WHERE id_laptop = :id_laptop");
-  $updateLaptopKategori->execute([
-    ":id_laptop" => $data['id_laptop'],
-    ":id_kategori" => $idKategori
-  ]);
+  $kategoriBaru = $data['kategori'];
+  $idKategoriBaru = [];
+
+  // Proses kategori baru
+  foreach ($kategoriBaru as $kategori) {
+    $queryIdKategori = DB->prepare("SELECT id_kategori FROM kategori WHERE nama_kategori = :nama_kategori");
+    $queryIdKategori->execute([":nama_kategori" => $kategori]);
+
+    $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'] ?? null;
+
+    if (!$idKategori) {
+      continue; // Jika kategori tidak ditemukan, lewati
+    }
+
+    $idKategoriBaru[] = $idKategori;
+
+    // Tambahkan ke laptop_kategori jika belum ada
+    $insertKategori = DB->prepare("INSERT IGNORE INTO laptop_kategori (id_laptop, id_kategori) VALUES (:id_laptop, :id_kategori)");
+    $insertKategori->execute([
+      ":id_laptop" => $data['id-laptop'],
+      ":id_kategori" => $idKategori
+    ]);
+  }
+
+  // Hapus kategori lama yang tidak ada dalam kategori baru
+  foreach ($kategoriLama as $row) {
+    if (!in_array($row['id_kategori'], $idKategoriBaru)) {
+      $deleteKategori = DB->prepare("DELETE FROM laptop_kategori WHERE id_laptop = :id_laptop AND id_kategori = :id_kategori");
+      $deleteKategori->execute([
+        ":id_laptop" => $data['id-laptop'],
+        ":id_kategori" => $row['id_kategori']
+      ]);
+    }
+  }
 }
 
 function hapusAlternatif($id)

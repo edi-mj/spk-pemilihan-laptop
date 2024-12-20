@@ -38,8 +38,8 @@ function alphanumericWithSpace($input)
 // VALIDASI FORM PREFERENSI USER
 function validateKategori(&$errors, $input)
 {
-  if ($input == -1) {
-    $errors['kategori'] = "mohon pilih kategori";
+  if (empty($input)) {
+    $errors['kategori'] = "tidak boleh kosong";
   }
 }
 
@@ -131,7 +131,7 @@ function authenticate(&$errors, $username, $password)
 // VALIDASI TAMBAH KRITERIA
 function validateNamaKriteria(&$errors, $input)
 {
-  if (isEmpty($input)) {
+  if (empty($input)) {
     $errors['nama-kriteria'] = "Nama kriteria tidak boleh kosong";
   } else {
     if (!isAlphabet($input)) {
@@ -194,7 +194,7 @@ function validateGambar(&$errors)
   $namaFile = $_FILES["gambar"]["name"];
   $error = $_FILES["gambar"]["error"];
   if ($error === 4) {
-    $errors['gambar'] = "pilih gambar terlebih dahulu";
+    $errors['gambar'] = "tidak boleh kosong";
     return false;
   }
   $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
