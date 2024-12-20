@@ -72,6 +72,7 @@ function addAlternatif($data, $gambar)
       ":id_kategori" => $idKategori
     ]);
   }
+  move_uploaded_file($_FILES["gambar"]["tmp_name"], BASEPATH . "/src/assets/img/" . $gambar);
 }
 
 function getAlternatif()
@@ -101,6 +102,20 @@ function getAlternatifById($id)
   $result = $st->fetch(PDO::FETCH_ASSOC);
   $result['nama_kategori'] = $arrKategori;
   return $result;
+}
+
+function getLaptopBySearch($search)
+{
+  $search = trim($search);
+  if (empty($search)) {
+    return false;
+  }
+  $st = DB->prepare("SELECT * FROM laptop WHERE model LIKE :search_model");
+  $st->execute([
+    ":search_model" => "%$search%"
+  ]);
+
+  return $st->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function updateAlternatif($data, $gambar)
@@ -158,6 +173,7 @@ function updateAlternatif($data, $gambar)
       ]);
     }
   }
+  move_uploaded_file($_FILES["gambar"]["tmp_name"], BASEPATH . "/src/assets/img/" . $gambar);
 }
 
 function hapusAlternatif($id)

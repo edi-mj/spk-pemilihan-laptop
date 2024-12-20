@@ -4,6 +4,12 @@ $page = 'Hasil';
 require './layout/navbar.php';
 require_once BASEPATH . '/src/actor_permission.php';
 require_once BASEPATH . '/src/user_permission.php';
+require_once BASEPATH . '/src/sql.php';
+
+if (isset($_GET['cari'])) {
+  $search = $_GET['input-cari'];
+  $hasilCari = getLaptopBySearch($search);
+}
 
 ?>
 <!-- NAVBAR END -->
@@ -11,26 +17,22 @@ require_once BASEPATH . '/src/user_permission.php';
 <!-- CONTENT -->
 <div id="content" class="container d-flex flex-wrap justify-content-center gap-4">
   <!-- CARD ITEM -->
-  <div class="card shadow border-0" style="width: 14rem;">
-    <div class="ratio ratio-1x1 border-bottom border-dark-subtle">
-      <img src="../assets/img/sample.jpg" class="card-img-top img-fluid object-fit-contain" alt="...">
-    </div>
-    <div class="card-body">
-      <p class="card-text">ASUS Vivobook M413</p>
-      <h5 class="card-title">Rp.7.800.000</h5>
-      <a href="#" class="btn btn-primary">Lihat Detail</a>
-    </div>
-  </div>
-  <div class="card shadow border-0" style="width: 14rem;">
-    <div class="ratio ratio-1x1 border-bottom border-dark-subtle">
-      <img src="../assets/img/test.png" class="card-img-top img-fluid object-fit-contain " alt="item">
-    </div>
-    <div class="card-body">
-      <p class="card-text">ASUS Vivobook M413</p>
-      <h5 class="card-title">Rp.7.800.000</h5>
-      <a href="#" class="btn btn-primary">Lihat Detail</a>
-    </div>
-  </div>
+  <?php if (!empty($hasilCari)): ?>
+    <?php foreach ($hasilCari as $laptop): ?>
+      <div class="card shadow border-0" style="width: 14rem;">
+        <div class="ratio ratio-1x1 border-bottom border-dark-subtle">
+          <img src="<?= BASEURL . '/src/assets/img/' . $laptop['gambar'] ?>" class="card-img-top img-fluid object-fit-contain" alt="...">
+        </div>
+        <div class="card-body">
+          <p class="card-text"><?= $laptop['model'] ?></p>
+          <h5 class="card-title"><?= $laptop['harga'] ?></h5>
+          <a href="./laptop_details.php?id_laptop=<?= $laptop['id_laptop'] ?>" class="btn btn-primary">Lihat Detail</a>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  <?php else: ?>
+    <p class="fs-5">Oops! Laptop yang kamu cari tidak tersedia.</p>
+  <?php endif; ?>
   <!-- CARD ITEM END -->
 </div>
 <!-- CONTENT END -->
