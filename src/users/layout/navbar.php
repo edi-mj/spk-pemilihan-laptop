@@ -1,7 +1,11 @@
 <?php
 require_once '../base.php';
-if (isset($_GET['cari'])) {
-  $search_value = htmlspecialchars($_GET['input-cari']);
+require BASEPATH . '/src/validate.php';
+if (isset($_POST['cari'])) {
+  $search = $_POST['input-cari'];
+  if (!isEmpty($search)) {
+    header("Location:" . BASEURL . "/src/users/laptop_list.php?input-cari=" . $search);
+  }
 }
 ?>
 
@@ -32,10 +36,10 @@ if (isset($_GET['cari'])) {
           <a href="<?= BASEURL; ?>/src/users/index.php" class="nav-link <?= $page == 'Beranda' ? 'active' : '' ?>"><i class="bi bi-house-door pe-1"></i>Beranda</a>
         </li>
       </ul>
-      <form method="GET" action="./laptop_list.php" class="d-flex" role="search">
+      <form method="POST" action="" class="d-flex" role="search">
         <input
           name="input-cari"
-          value="<?= ($search_value) ?? '' ?>"
+          value="<?= isset($_GET['input-cari']) ? (htmlspecialchars($_GET['input-cari'])) : '' ?>"
           class="form-control me-2"
           type="search"
           placeholder="Cari Laptop" />

@@ -6,10 +6,8 @@ require_once BASEPATH . '/src/actor_permission.php';
 require_once BASEPATH . '/src/user_permission.php';
 require_once BASEPATH . '/src/sql.php';
 
-if (isset($_GET['cari'])) {
-  $search = $_GET['input-cari'];
-  $hasilCari = getLaptopBySearch($search);
-}
+$search = $_GET['input-cari'];
+$hasilCari = getLaptopBySearch($search);
 
 ?>
 <!-- NAVBAR END -->

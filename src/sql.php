@@ -77,10 +77,21 @@ function addAlternatif($data, $gambar)
 
 function getAlternatif()
 {
-  $st = DB->prepare("SELECT l.*, k.nama_kategori FROM laptop l, kategori k, laptop_kategori lk WHERE lk.id_laptop = l.id_laptop AND lk.id_kategori = k.id_kategori");
-  $st->execute();
+  $queryLaptop = DB->prepare("SELECT * FROM laptop");
+  $queryLaptop->execute();
+  $laptop = $queryLaptop->fetchAll(PDO::FETCH_ASSOC);
 
-  return $st->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($laptop as &$row) {
+    $queryKategori = DB->prepare("SELECT k.nama_kategori FROM kategori k JOIN laptop_kategori lk USING (id_kategori) WHERE lk.id_laptop = :id_laptop");
+    $queryKategori->execute([
+      ":id_laptop" => $row['id_laptop']
+    ]);
+    $kategori = $queryKategori->fetchAll(PDO::FETCH_ASSOC);
+    $kategoriResult = array_column($kategori, "nama_kategori");
+    $row['nama_kategori'] = $kategoriResult;
+  }
+
+  return $laptop;
 }
 
 function getAlternatifById($id)
@@ -120,6 +131,15 @@ function getLaptopBySearch($search)
 
 function updateAlternatif($data, $gambar)
 {
+  // data lama laptop
+  $dataLaptopLama = getAlternatifById($data['id-laptop']);
+  // hapus gambar sebelum lama
+  if (isset($_FILES['gambar']['tmp_name']) && $_FILES['gambar']['error'] != 4) {
+    unlink(BASEPATH . "/src/assets/img/" . $dataLaptopLama['gambar']);
+
+    move_uploaded_file($_FILES["gambar"]["tmp_name"], BASEPATH . "/src/assets/img/" . $gambar);
+  }
+
   // Update data laptop
   $updateLaptop = DB->prepare("UPDATE laptop SET model = :model, harga = :harga, RAM = :RAM, tipe_storage = :tipe_storage, kapasitas_storage = :kapasitas_storage, kapasitas_baterai = :kapasitas_baterai, berat = :berat, gambar = :gambar WHERE id_laptop = :id");
   $updateLaptop->execute([
@@ -173,12 +193,14 @@ function updateAlternatif($data, $gambar)
       ]);
     }
   }
-  move_uploaded_file($_FILES["gambar"]["tmp_name"], BASEPATH . "/src/assets/img/" . $gambar);
 }
 
 function hapusAlternatif($id)
 {
   try {
+    $dataLaptop = getAlternatifById($id);
+    unlink(BASEPATH . "/src/assets/img/" . $dataLaptop['gambar']);
+
     $st = DB->prepare("DELETE FROM laptop_kategori WHERE id_laptop = :id");
     $st->execute([
       ":id" => $id
@@ -243,5 +265,36 @@ function hapusKriteria($id)
     return true;
   } catch (PDOException $e) {
     return false;
+  }
+}
+
+function addPreferensi($data)
+{
+  $queryIdKategori = DB->prepare("SELECT id_kategori FROM kategori WHERE nama_kategori = :nama_kategori");
+  $queryIdKategori->execute([
+    ":nama_kategori" => $data['kategori']
+  ]);
+  $idKategori = $queryIdKategori->fetch(PDO::FETCH_ASSOC)['id_kategori'];
+  $maks_harga = empty($data['maks_harga']) ? null : $data['maks_harga'];
+
+  $queryIdUser = DB->prepare("SELECT * FROM preferensi WHERE id_users = :id_users");
+  $queryIdUser->execute([
+    ":id_users" => $data['id_users']
+  ]);
+  if ($queryIdUser->rowCount() == 0) {
+
+    $st = DB->prepare("INSERT INTO `preferensi`(`id_kategori`, `id_users`, `maks_harga`) VALUES (:id_kategori, :id_users, :maks_harga)");
+    $st->execute([
+      ":id_kategori" => $idKategori,
+      ":id_users" => $data['id_users'],
+      ":maks_harga" => $maks_harga
+    ]);
+  } else {
+    $st = DB->prepare("UPDATE preferensi SET id_kategori = :id_kategori, maks_harga = :maks_harga WHERE id_users = :id_users");
+    $st->execute([
+      ":id_users" => $data['id_users'],
+      ":id_kategori" => $idKategori,
+      ":maks_harga" => $maks_harga
+    ]);
   }
 }

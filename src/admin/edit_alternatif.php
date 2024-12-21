@@ -12,6 +12,8 @@ if (isset($_POST['edit'])) {
 
   $model = $_POST['model'];
   $harga = $_POST['harga'];
+  $harga = preg_replace("/[^0-9]/", "", $harga);
+  var_dump($harga);
   $ram = $_POST['ram'];
   $tipeStorage = $_POST['tipe-storage'];
   $kapasitasStorage = $_POST['kapasitas-storage'];
@@ -114,7 +116,7 @@ if (isset($_POST['edit'])) {
 
           </div>
           <div class=" col-md-6">
-            <label for="kapasitas-baterai" class="form-label">Kapasitas Baterai (mAh)<span class="text-danger">
+            <label for="kapasitas-baterai" class="form-label">Kapasitas Baterai (Wh)<span class="text-danger">
                 <?= $errors['kapasitas-baterai'] ?? '' ?>
               </span></label>
             <input type="text" id="kapasitas-baterai" name="kapasitas-baterai" value="<?= ($kapasitasBateraiValue) ?? '' ?>" class="form-control">

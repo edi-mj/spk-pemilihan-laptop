@@ -40,7 +40,7 @@ $data_alternatif = getAlternatif();
             <th>Kapasitas Baterai</th>
             <th>Berat</th>
             <th>Kategori</th>
-            <th>Aksi</th>
+            <th style="width:10%">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@ $data_alternatif = getAlternatif();
               <td><?= $row['kapasitas_storage']; ?></td>
               <td><?= $row['kapasitas_baterai']; ?></td>
               <td><?= $row['berat']; ?></td>
-              <td><?= $row['nama_kategori']; ?></td>
+              <td><?= implode(", ", $row['nama_kategori']); ?></td>
               <td>
                 <a href="edit_alternatif.php?id_laptop=<?= $row['id_laptop']; ?>" class="btn btn-sm btn-warning m-auto">
                   <i class="bi bi-pencil-square"></i>

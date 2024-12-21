@@ -19,7 +19,7 @@ function isNumeric($input)
 
 function isAlphabet($input)
 {
-  $patt = "/^[a-zA-Z]+$/";
+  $patt = "/^[a-zA-Z]+\s?[a-zA-Z]*$/";
   return preg_match($patt, $input);
 }
 
@@ -46,7 +46,7 @@ function validateKategori(&$errors, $input)
 function validatePrice(&$errors, $input)
 {
   if (!isEmpty($input) && !isDigit($input)) {
-    $errors['max-price'] = "masukan hanya boleh mengandung angka";
+    $errors['maks_harga'] = "masukan hanya boleh mengandung angka";
   }
 }
 // VALIDASI FORM PREFERENSI USER END
@@ -119,7 +119,7 @@ function authenticate(&$errors, $username, $password)
   $user = getUser($username, $password);
   if (!empty($user)) {
     $_SESSION['is_logged_in'] = true;
-    $_SESSION['user-id'] = $user['id_users'];
+    $_SESSION['id_users'] = $user['id_users'];
     $_SESSION['role'] = $user['role'];
     return true;
   }

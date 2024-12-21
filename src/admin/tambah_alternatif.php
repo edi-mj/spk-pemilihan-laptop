@@ -7,7 +7,11 @@ require_once BASEPATH . '/src/admin_permission.php';
 
 $errors = [];
 if (isset($_POST['tambah'])) {
-
+  $_POST['harga'] = preg_replace("/[^0-9]/", "", $_POST['harga']);
+  $_POST['ram'] = preg_replace("/[^0-9]/", "", $_POST['ram']);
+  $_POST['kapasitas-storage'] = preg_replace("/[^0-9]/", "", $_POST['kapasitas-storage']);
+  $_POST['kapasitas-baterai'] = preg_replace("/[^0-9]/", "", $_POST['kapasitas-baterai']);
+  $_POST['berat'] = preg_replace("/[^0-9\.]/", "", $_POST['berat']);
   $model = $_POST['model'];
   $harga = $_POST['harga'];
   $ram = $_POST['ram'];
@@ -102,7 +106,7 @@ if (isset($_POST['tambah'])) {
 
           </div>
           <div class=" col-md-6">
-            <label for="kapasitas-baterai" class="form-label">Kapasitas Baterai (mAh)<span class="text-danger">
+            <label for="kapasitas-baterai" class="form-label">Kapasitas Baterai (Wh)<span class="text-danger">
                 <?= $errors['kapasitas-baterai'] ?? '' ?>
               </span></label>
             <input type="text" id="kapasitas-baterai" name="kapasitas-baterai" value="<?= ($kapasitasBateraiValue) ?? '' ?>" class="form-control">
