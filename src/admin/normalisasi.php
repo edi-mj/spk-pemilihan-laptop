@@ -49,11 +49,14 @@ function normalisasiTerbobot($data)
 function nilaiPreferensi($data)
 {
   $nilai =  array_map(function ($row) {
-    $newRow = [];
-    $newRow['model'] = $row['model'];
+    // $newRow = [];
+    // $newRow['id_laptop'] = $row['id_laptop'];
+    // $newRow['model'] = $row['model'];
+    // $newRow['harga'] = $row['harga'];
+    // $newRow['nama_kategori'] = $row['nama_kategori'];
     $skor = $row['harga'] + $row['RAM'] + $row['kapasitas_storage'] + $row['kapasitas_baterai'] + $row['berat'];
-    $newRow['skor'] = round($skor, 4);
-    return $newRow;
+    $row['skor'] = round($skor, 4);
+    return $row;
   }, $data);
 
   usort($nilai, function ($a, $b) {

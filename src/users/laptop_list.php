@@ -13,13 +13,13 @@ $hasilCari = getLaptopBySearch($search);
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container d-flex flex-wrap justify-content-center gap-4">
+<div id="content" class="container min-vh-100 d-flex flex-wrap justify-content-center align-items-center gap-4">
   <!-- CARD ITEM -->
   <?php if (!empty($hasilCari)): ?>
     <?php foreach ($hasilCari as $laptop): ?>
-      <div class="card shadow border-0" style="width: 14rem;">
+      <div class="card shadow border-0 rounded-4" style="width: 14rem;">
         <div class="ratio ratio-1x1 border-bottom border-dark-subtle">
-          <img src="<?= BASEURL . '/src/assets/img/' . $laptop['gambar'] ?>" class="card-img-top img-fluid object-fit-contain" alt="...">
+          <img src="<?= BASEURL . '/src/assets/img/' . $laptop['gambar'] ?>" class="card-img-top img-fluid object-fit-cover rounded-top-4 " alt="...">
         </div>
         <div class="card-body">
           <p class="card-text"><?= $laptop['model'] ?></p>

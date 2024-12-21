@@ -45,7 +45,7 @@ function validateKategori(&$errors, $input)
 
 function validatePrice(&$errors, $input)
 {
-  if (!isEmpty($input) && !isDigit($input)) {
+  if (!isEmpty($input) && !isNumeric($input)) {
     $errors['maks_harga'] = "masukan hanya boleh mengandung angka";
   }
 }

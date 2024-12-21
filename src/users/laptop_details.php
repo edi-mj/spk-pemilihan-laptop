@@ -5,28 +5,33 @@ require './layout/navbar.php';
 require_once BASEPATH . '/src/actor_permission.php';
 require_once BASEPATH . '/src/user_permission.php';
 
+$dataLaptop = getAlternatifById($_GET['id_laptop']);
+
+$prev_page = $_SERVER['HTTP_REFERER'] ?? BASEURL . '/src/users/index.php';
+
 ?>
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container mt-5 d-flex flex-wrap justify-content-center gap-4">
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="../assets/img/test.png" class="card-img-top img-fluid object-fit-contain rounded-start" alt="item">
+<div id="content" class="container min-vh-100 d-flex flex-column align-items-center justify-content-center gap-4">
+  <div class="card rounded-4" style="width: 65%;">
+    <div class="row g-2">
+      <div class="col-md-6">
+        <img src="<?= BASEURL . '/src/assets/img/' . $dataLaptop['gambar'] ?>" class="card-img-top img-fluid object-fit-cover rounded-start-4" alt="<? $dataLaptop['model'] ?>">
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="card-body">
-          <h5 class="card-title">Model</h5>
-          <p class="card-text">Harga: </p>
-          <p class="card-text">RAM: </p>
-          <p class="card-text">Storage: </p>
-          <p class="card-text">Kapasitas Baterai: </p>
-          <p class="card-text">Berat: </p>
+          <h6 class="card-title">Model: <?= $dataLaptop['model'] ?></h6>
+          <p class="card-text">Harga: <?= $dataLaptop['harga'] ?></p>
+          <p class="card-text">RAM: <?= $dataLaptop['RAM'] ?></p>
+          <p class="card-text">Storage: <?= $dataLaptop['kapasitas_storage'] ?></p>
+          <p class="card-text">Kapasitas Baterai: <?= $dataLaptop['kapasitas_baterai'] ?></p>
+          <p class="card-text">Berat: <?= $dataLaptop['berat'] ?></p>
         </div>
       </div>
     </div>
   </div>
+  <a href="<?= $prev_page ?>" class="btn btn-outline-secondary">Kembali</a>
 </div>
 <!-- CONTENT END -->
 
