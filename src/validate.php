@@ -31,7 +31,7 @@ function isAlphanumeric($field)
 
 function alphanumericWithSpace($input)
 {
-  $patt = "/^[A-Za-z\d ]+$/";
+  $patt = "/^[\w\s-]+$/";
   return preg_match($patt, $input);
 }
 

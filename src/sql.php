@@ -298,3 +298,28 @@ function addPreferensi($data)
     ]);
   }
 }
+
+
+// NORMALISASI
+
+function getMinMax()
+{
+  $st = DB->prepare("SELECT MIN(harga) AS min_harga, MAX(RAM) AS maks_ram, MAX(kapasitas_storage) AS maks_storage, MAX(kapasitas_baterai) AS maks_baterai, MIN(berat) AS min_berat FROM `laptop`;");
+  $st->execute();
+  return $st->fetch(PDO::FETCH_ASSOC);
+}
+
+function getBobotKriteria()
+{
+  $st = DB->prepare("SELECT nama_kriteria, bobot FROM kriteria");
+  $st->execute();
+  $fetch = $st->fetchAll(PDO::FETCH_ASSOC);
+
+  $result = [];
+
+  foreach ($fetch as $row) {
+    $result[$row['nama_kriteria']] = $row['bobot'];
+  }
+
+  return $result;
+}
