@@ -22,10 +22,10 @@ $prev_page = $_SERVER['HTTP_REFERER'] ?? BASEURL . '/src/users/index.php';
       <div class="col-md-6">
         <div class="card-body">
           <h6 class="card-title">Model: <?= $dataLaptop['model'] ?></h6>
-          <p class="card-text">Harga: <?= $dataLaptop['harga'] ?></p>
-          <p class="card-text">RAM: <?= $dataLaptop['RAM'] ?></p>
-          <p class="card-text">Storage: <?= $dataLaptop['kapasitas_storage'] ?></p>
-          <p class="card-text">Kapasitas Baterai: <?= $dataLaptop['kapasitas_baterai'] ?></p>
+          <p class="card-text">Harga: Rp. <?= number_format($dataLaptop['harga'], 0, ',', '.'); ?></p>
+          <p class="card-text">RAM: <?= $dataLaptop['RAM'] ?> GB</p>
+          <p class="card-text">Storage: <?= $dataLaptop['tipe_storage'] . ' ' . $dataLaptop['kapasitas_storage'] ?> GB</p>
+          <p class="card-text">Kapasitas Baterai: <?= $dataLaptop['kapasitas_baterai'] ?> Wh</p>
           <p class="card-text">Berat: <?= $dataLaptop['berat'] ?></p>
         </div>
       </div>

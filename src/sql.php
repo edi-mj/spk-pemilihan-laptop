@@ -323,3 +323,26 @@ function getBobotKriteria()
 
   return $result;
 }
+
+
+function countUsers()
+{
+  $st = DB->prepare("SELECT COUNT(*) AS count FROM users WHERE role = 'user'");
+  $st->execute();
+
+  return $st->fetch(PDO::FETCH_ASSOC)['count'];
+}
+function countAlternatif()
+{
+  $st = DB->prepare("SELECT COUNT(*) AS count FROM laptop");
+  $st->execute();
+
+  return $st->fetch(PDO::FETCH_ASSOC)['count'];
+}
+function countKriteria()
+{
+  $st = DB->prepare("SELECT COUNT(*) AS count FROM kriteria");
+  $st->execute();
+
+  return $st->fetch(PDO::FETCH_ASSOC)['count'];
+}

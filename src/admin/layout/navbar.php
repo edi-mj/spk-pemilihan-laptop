@@ -1,4 +1,4 @@
-<div id="sidebar" class="position-fixed start-0 top-0 bg-dark bg-gradient text-white vh-100 p-3" style="width: 20%;">
+<div id="sidebar" class="position-fixed start-0 top-0 bg-dark bg-gradient text-white vh-100 p-3" style="width: 15%;">
   <h4>Admin</h4>
   <ul class="nav flex-column fw-medium" style="height: 100%;">
     <li class="nav-item <?= ($page == 'Dashboard') ? 'bg-primary rounded' : '' ?>">

@@ -49,7 +49,7 @@ $hasilRekomendasi = array_slice($hasilRekomendasi, 0, 3);
           <div class="card-body">
             <h6 class="card-title"><?= $laptop['model'] ?></h6>
             <p class="card-text">Rp. <?= number_format($laptop['harga'], 0, ',', '.'); ?></p>
-            <a href="./laptop_details.php?id_laptop=<?= $laptop['id_laptop'] ?>&prev_page=rekomendasi.php" class="btn btn-primary">Lihat Detail</a>
+            <a href="./laptop_details.php?id_laptop=<?= $laptop['id_laptop'] ?>" class="btn btn-primary">Lihat Detail</a>
           </div>
         </div>
       <?php endforeach; ?>

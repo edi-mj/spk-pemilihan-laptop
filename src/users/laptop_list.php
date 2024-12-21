@@ -22,8 +22,8 @@ $hasilCari = getLaptopBySearch($search);
           <img src="<?= BASEURL . '/src/assets/img/' . $laptop['gambar'] ?>" class="card-img-top img-fluid object-fit-cover rounded-top-4 " alt="...">
         </div>
         <div class="card-body">
-          <p class="card-text"><?= $laptop['model'] ?></p>
-          <h5 class="card-title"><?= $laptop['harga'] ?></h5>
+          <h6 class="card-title"><?= $laptop['model'] ?></h6>
+          <p class="card-text">Rp. <?= number_format($laptop['harga'], 0, ',', '.'); ?></p>
           <a href="./laptop_details.php?id_laptop=<?= $laptop['id_laptop'] ?>" class="btn btn-primary">Lihat Detail</a>
         </div>
       </div>
