@@ -1,5 +1,5 @@
 <?php
-require_once './base.php';
+require_once './src/base.php';
 require BASEPATH . '/src/validate.php';
 require_once BASEPATH . '/src/is_logged_in.php';
 
@@ -13,10 +13,10 @@ if (isset($_POST['login'])) {
 
   if (authenticate($errors, $username, $password)) {
     if ($_SESSION['role'] == 'user') {
-      header("Location:users/index.php");
+      header("Location:" . BASEURL . "/src/users/");
       exit();
     } else {
-      header("Location:admin/index.php");
+      header("Location:" . BASEURL . "/src/admin/");
       exit();
     }
   }
@@ -32,10 +32,10 @@ if (isset($_POST['login'])) {
   <title>Login</title>
   <link
     rel="stylesheet"
-    href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    href="<?= BASEURL ?>/node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link
     rel="stylesheet"
-    href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
+    href="<?= BASEURL ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
 </head>
 
 <body class="d-flex align-items-center justify-content-center bg-body-secondary" style="height: 100vh;">
@@ -54,7 +54,7 @@ if (isset($_POST['login'])) {
         <input type="password" id="password" name="password" value="<?= $passwordValue ?? '' ?>" class="form-control">
       </div>
       <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
-      <p class="text-center mt-3">Belum memiliki akun? <a class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="./registration.php">Daftar</a></p>
+      <p class="text-center mt-3">Belum memiliki akun? <a class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<?= BASEURL ?>/src/registration.php">Daftar</a></p>
     </form>
   </div>
 </body>

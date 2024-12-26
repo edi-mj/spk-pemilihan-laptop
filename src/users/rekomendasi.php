@@ -35,7 +35,7 @@ $hasilRekomendasi = array_slice($hasilRekomendasi, 0, 3);
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
+<div id="content" class="container min-vh-100 d-flex flex-column justify-content-center align-items-center" style="padding: 56px;">
   <!-- CARD ITEM -->
   <?php if (!empty($hasilRekomendasi)): ?>
     <h3 class="m-4">Rekomendasi Untuk Anda</h3>

@@ -13,7 +13,7 @@ $hasilCari = getLaptopBySearch($search);
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container min-vh-100 d-flex flex-wrap justify-content-center align-items-center gap-4">
+<div id="content" class="container min-vh-100 d-flex flex-wrap justify-content-center align-items-center gap-4" style="padding: 56px;">
   <!-- CARD ITEM -->
   <?php if (!empty($hasilCari)): ?>
     <?php foreach ($hasilCari as $laptop): ?>

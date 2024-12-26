@@ -24,7 +24,7 @@ if (isset($_POST['cari'])) {
     href="../../node_modules/bootstrap-icons/font/bootstrap-icons.min.css" />
 </head>
 
-<body class="bg-body-tertiary">
+<body class="bg-body-tertiary mx-auto">
   <!-- NAVBAR -->
   <nav class="navbar fixed-top bg-body-secondary shadow navbar-expand-lg">
     <div class="container-fluid">

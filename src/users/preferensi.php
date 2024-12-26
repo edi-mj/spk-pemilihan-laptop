@@ -25,7 +25,7 @@ if (isset($_POST['mulai'])) {
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+<div class="container min-vh-100 d-flex justify-content-center align-items-center" style="padding: 56px;">
   <div class="container p-5 w-50 shadow rounded">
     <h4 class="text-center mb-4">Input Preferensi Anda</h4>
     <form action="" method="POST">

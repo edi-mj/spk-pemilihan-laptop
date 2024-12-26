@@ -33,6 +33,7 @@ $data_alternatif = getAlternatif();
         <table class="w-100 table table-striped text-center">
           <thead class="table-light align-middle">
             <tr>
+              <th>No</th>
               <th>Model</th>
               <th>Harga</th>
               <th>RAM</th>
@@ -45,8 +46,9 @@ $data_alternatif = getAlternatif();
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($data_alternatif as $row): ?>
+            <?php foreach ($data_alternatif as $no => $row): ?>
               <tr>
+                <td><?= $no + 1 ?></td>
                 <td><?= $row['model']; ?></td>
                 <td>Rp. <?= number_format($row['harga'], 0, ',', '.'); ?></td>
                 <td><?= $row['RAM']; ?></td>

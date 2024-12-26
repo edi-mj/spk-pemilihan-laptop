@@ -23,7 +23,7 @@ if (isset($_POST['daftar'])) {
   if (!$errors) {
     addUser($_POST);
 
-    header("Location:index.php");
+    header("Location:" . BASEURL . "/index.php");
     exit();
   }
 }
@@ -77,7 +77,7 @@ if (isset($_POST['daftar'])) {
         </div>
       </div>
       <button name="daftar" type="submit" class="btn btn-primary w-100">Daftar</button>
-      <p class="text-center mt-3">Sudah memiliki akun? <a class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="./index.php">Login</a></p>
+      <p class="text-center mt-3">Sudah memiliki akun? <a class="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="<?= BASEURL ?>/index.php">Login</a></p>
 
     </form>
   </div>

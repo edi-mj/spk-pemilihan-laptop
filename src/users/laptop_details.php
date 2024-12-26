@@ -13,8 +13,8 @@ $prev_page = $_SERVER['HTTP_REFERER'] ?? BASEURL . '/src/users/index.php';
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container min-vh-100 d-flex flex-column align-items-center justify-content-center gap-4">
-  <div class="card rounded-4" style="width: 65%;">
+<div id="content" class="container min-vh-100 d-flex flex-column align-items-center justify-content-center gap-4" style="padding: 56px;">
+  <div class="card rounded-4 shadow" style="width: 65%;">
     <div class="row g-2">
       <div class="col-md-6">
         <img src="<?= BASEURL . '/src/assets/img/' . $dataLaptop['gambar'] ?>" class="card-img-top img-fluid object-fit-cover rounded-start-4" alt="<? $dataLaptop['model'] ?>">

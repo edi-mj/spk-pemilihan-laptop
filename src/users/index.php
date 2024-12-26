@@ -8,7 +8,7 @@ require_once BASEPATH . '/src/user_permission.php';
 <!-- NAVBAR END -->
 
 <!-- CONTENT -->
-<div id="content" class="container min-vh-100 d-flex flex-column align-items-center justify-content-center p-5">
+<div id="content" class="container min-vh-100 d-flex flex-column align-items-center justify-content-center p-5" style="padding: 56px;">
 
   <h2>
     Rekomendasi Pemilihan Laptop
